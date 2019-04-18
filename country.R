@@ -1,7 +1,15 @@
+# install.packages("gdata", repos = "http://cran.us.r-project.org")
+# install.packages("frontier", repos="http://R-Forge.R-project.org")
 library(frontier)
-data( front41Data )
-sfaResult <- sfa( log( output ) ~ log( capital ) + 
-log( labour ), data = front41Data )
-coef( summary( sfaResult ), which = "ols" )
-coef( summary( sfaResult ) )
-coef( summary( sfaResult , extraPar = TRUE ) ) 
+library(gdata)
+data(front41Data)
+data <- read.xls("data.xlsx", na.strings=c("NA","#DIV/0!"), sheet="Sheet1")
+print(data)
+print("------\n-------\n------")
+print(front41Data)
+
+ sfaResult <- sfa( log( GDP ) ~ log( COR ) + log( EFF ),
+          data = data )
+       coef( sfaResult, which = "ols" )
+       coef( sfaResult, which = "grid" )
+       coef( sfaResult )

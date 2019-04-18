@@ -1,0 +1,1 @@
+R CMD BATCH --args country.R

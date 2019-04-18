@@ -1,0 +1,157 @@
+
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin16.7.0 (64-bit)
+
+R是自由软件，不带任何担保。
+在某些条件下你可以将其自由散布。
+用'license()'或'licence()'来看散布的详细条件。
+
+R是个合作计划，有许多人为之做出了贡献.
+用'contributors()'来看合作者的详细情况
+用'citation()'会告诉你如何在出版物中正确地引用R或R程序包。
+
+用'demo()'来看一些示范程序，用'help()'来阅读在线帮助文件，或
+用'help.start()'通过HTML浏览器来看帮助文件。
+用'q()'退出R.
+
+[原来保存的工作空间已还原]
+
+> # install.packages("gdata", repos = "http://cran.us.r-project.org")
+> # install.packages("frontier", repos="http://R-Forge.R-project.org")
+> library(frontier)
+载入需要的程辑包：micEcon
+
+If you have questions, suggestions, or comments regarding one of the 'micEcon' packages, please use a forum or 'tracker' at micEcon's R-Forge site:
+https://r-forge.r-project.org/projects/micecon/
+载入需要的程辑包：lmtest
+载入需要的程辑包：zoo
+
+载入程辑包：‘zoo’
+
+The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+
+Please cite the 'frontier' package as:
+Tim Coelli and Arne Henningsen (2013). frontier: Stochastic Frontier Analysis. R package version 1.1. http://CRAN.R-Project.org/package=frontier.
+
+If you have questions, suggestions, or comments regarding the 'frontier' package, please use a forum or 'tracker' at frontier's R-Forge site:
+https://r-forge.r-project.org/projects/frontier/
+> library(gdata)
+gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
+
+gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
+
+载入程辑包：‘gdata’
+
+The following object is masked from ‘package:stats’:
+
+    nobs
+
+The following object is masked from ‘package:utils’:
+
+    object.size
+
+The following object is masked from ‘package:base’:
+
+    startsWith
+
+> data(front41Data)
+> data <- read.xls("data.xlsx", na.strings=c("NA","#DIV/0!"), sheet="Sheet1")
+> print(data)
+  X          GDP   COR   EFF
+1 0 2.630947e+12 48.56 56.73
+2 1 2.408567e+11 22.60 31.25
+3 2 1.799922e+11 19.23 22.12
+4 3 2.074494e+10  3.85  9.13
+5 4 8.254772e+10 41.35 48.08
+6 5 3.914372e+09 21.63 35.58
+7 6 2.146396e+10 23.56 18.75
+8 7 2.339922e+09 91.83 70.67
+> print("------\n-------\n------")
+[1] "------\n-------\n------"
+> print(front41Data)
+   firm output capital labour
+1     1 12.778   9.416 35.134
+2     2 24.285   4.643 77.297
+3     3 20.855   5.095 89.799
+4     4 13.213   4.935 35.698
+5     5 12.018   8.717 27.878
+6     6 15.284   1.066 92.174
+7     7  6.707   0.258 97.907
+8     8 21.656   6.334 82.084
+9     9 14.574   2.350 38.876
+10   10 13.743   1.076 81.761
+11   11  3.793   3.432  9.476
+12   12 37.118   4.033 55.096
+13   13 11.235   7.975 73.130
+14   14  9.237   7.604 24.350
+15   15 12.634   0.344 65.380
+16   16  9.677   2.440 63.839
+17   17 18.315   7.891 59.241
+18   18 17.094   2.906 72.574
+19   19 21.566   2.668 68.916
+20   20 18.872   4.220 57.424
+21   21 17.102   2.661 87.843
+22   22 14.550   2.455 30.789
+23   23 24.031   2.827 93.734
+24   24  6.787   0.439 35.961
+25   25  6.388   0.312 94.264
+26   26 32.996   3.265 95.773
+27   27 26.040   6.752 80.275
+28   28 16.619   4.425 49.886
+29   29 10.065   1.583 22.072
+30   30  6.554   0.907 38.727
+31   31  3.539   6.149  5.322
+32   32  1.660   0.479  2.520
+33   33 16.775   1.955 41.545
+34   34 10.085   8.169 68.389
+35   35  7.064   4.055 77.556
+36   36 31.793   5.029 77.812
+37   37 32.303   6.937 98.904
+38   38 14.571   8.405 42.740
+39   39 12.258   2.503 59.741
+40   40 12.683   6.590 18.085
+41   41 12.880   7.149 26.651
+42   42 15.841   8.040 50.488
+43   43 24.623   4.896 88.182
+44   44 20.571   6.722 30.451
+45   45 21.208   4.195 95.834
+46   46 12.493   4.551 36.704
+47   47 32.313   7.223 89.312
+48   48 15.575   9.561 29.055
+49   49 13.414   4.871 50.018
+50   50 10.228   9.312 40.996
+51   51 19.927   2.895 63.051
+52   52 26.938   8.085 60.992
+53   53 35.825   8.656 94.159
+54   54 12.768   3.427 39.312
+55   55 18.412   1.918 78.628
+56   56 19.853   6.177 64.377
+57   57  3.269   7.188  1.073
+58   58 21.358   9.329 87.124
+59   59 27.124   7.834 60.340
+60   60 14.105   5.621 44.218
+> 
+>  sfaResult <- sfa( log( GDP ) ~ log( COR ) + log( EFF ),
++           data = data )
+Warning messages:
+1: In sfa(log(GDP) ~ log(COR) + log(EFF), data = data) :
+  the residuals of the OLS estimates are right-skewed; this might indicate that there is no inefficiency or that the model is misspecified
+2: In sfa(log(GDP) ~ log(COR) + log(EFF), data = data) :
+  the parameter 'gamma' is close to the boundary of the parameter space [0,1]: this can cause convergence problems and can negatively affect the validity and reliability of statistical tests and might be caused by model misspecification
+>        coef( sfaResult, which = "ols" )
+(Intercept)    log(COR)    log(EFF)     sigmaSq 
+ 22.5555812  -0.9290547   1.4795446   7.3287830 
+>        coef( sfaResult, which = "grid" )
+(Intercept)    log(COR)    log(EFF)     sigmaSq       gamma 
+ 22.9436470  -0.9290547   1.4795446   4.7310845   0.0500000 
+>        coef( sfaResult )
+ (Intercept)     log(COR)     log(EFF)      sigmaSq        gamma 
+22.586507112 -0.929064150  1.479553838  4.581522941  0.000326089 
+> 
+> proc.time()
+ 用户  系统  流逝 
+1.076 0.081 1.164 
